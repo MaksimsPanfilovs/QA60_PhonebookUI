@@ -1,10 +1,18 @@
-package com_phonebook_test;
+package com.phonebook.test;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class HomePageTests extends TestBase {
+
+    @BeforeMethod
+    public void ensurePrecondition() {
+        if(!app.getHome().isHomeComponentPresent()) {
+            app.getHome().clickOnHomeLink();
+        }
+    }
 
     @Test
     public void isHomeComponentPresentTest() {
@@ -14,6 +22,6 @@ public class HomePageTests extends TestBase {
     }
 
     public boolean isHomeComponentPresent() {
-        return driver.findElements(By.cssSelector("div:nth-child(2)>div>div>h1")).size() > 0;
+        return app.getHome().isElementPresent(By.cssSelector("div:nth-child(2)>div>div>h1"));
     }
 }

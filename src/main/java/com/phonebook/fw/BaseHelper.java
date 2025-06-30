@@ -1,36 +1,22 @@
-package com_phonebook_test;
+package com.phonebook.fw;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 
 import java.time.Duration;
 
-public class TestBase {
-
+public class BaseHelper {
     WebDriver driver;
 
-    @BeforeMethod
-    public void setUp() {
-        driver = new ChromeDriver();
-        driver.get("https://telranedu.web.app/home");
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    public BaseHelper(WebDriver driver) {
+        this.driver = driver;
     }
 
     public boolean isElementPresent(By locator){
         return driver.findElements(locator).size()>0;
-    }
-
-
-    @AfterMethod(enabled = false)
-    public void tearDown() {
-        driver.quit();
     }
 
     public void type(By locator, String text) {
@@ -49,7 +35,19 @@ public class TestBase {
         if (alert == null) {
             return false;
         } else {
+            driver.switchTo().alert();
+            alert.accept();
             return true;
         }
     }
+
+    public void pause(int millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }
