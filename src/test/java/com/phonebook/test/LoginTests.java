@@ -27,6 +27,7 @@ public class LoginTests extends TestBase {
     public void loginNegativeTest() {
         app.getUser().clickOnLoginLink();
         app.getUser().fillRegisterLoginForm(new User().setEmail("").setPassword(UserData.PASSWORD));
+        app.getUser().pause(5000);
         app.getUser().clickOnLoginButton();
         Assert.assertTrue(app.getUser().isAlertDisplayed());
     }

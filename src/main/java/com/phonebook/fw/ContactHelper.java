@@ -45,4 +45,13 @@ public class ContactHelper extends BaseHelper {
     public void clickOnCart() {
         click(By.cssSelector(".contact-item_card__2SOIM"));
     }
+
+    public int sizeOfContacts() {
+        if (isElementPresent(By.cssSelector(".contact-item_card__2SOIM"))) {
+            return driver.findElements
+                    (By.cssSelector(".contact-item_card__2SOIM")).size();
+        }
+        return 0;
+    }
+
 }

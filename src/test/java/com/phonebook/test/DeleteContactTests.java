@@ -39,25 +39,18 @@ public class DeleteContactTests extends TestBase {
 
     @Test
     public void deleteContactTest() {
-        int sizeBefore = sizeOfContacts();
+        int sizeBefore = app.getContact().sizeOfContacts();
         // click on cart
         app.getContact().clickOnCart();
         // click on Remove button
         app.getContact().clickOnRemoveButton();
         app.getContact().pause(1000);
-        int sizeAfter = sizeOfContacts();
+        int sizeAfter = app.getContact().sizeOfContacts();
         Assert.assertEquals(sizeAfter, sizeBefore - 1);
 
     }
 
-    public int sizeOfContacts() {
-        // verify contact is deleted (by size)
-        if (app.getContact().isElementPresent(By.cssSelector(".contact-item_card__2SOIM"))) {
-            return app.driver.findElements
-                    (By.cssSelector(".contact-item_card__2SOIM")).size();
-        }
-        return 0;
-    }
+
 
 
 }
